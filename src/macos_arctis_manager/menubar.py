@@ -161,6 +161,15 @@ class ArctisApp(rumps.App):
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO)
+    # Run as a menu-bar-only accessory: no Dock icon, no app menu. Done in code
+    # so it holds regardless of how we're launched (terminal or .app wrapper).
+    try:
+        from AppKit import NSApplication, NSApplicationActivationPolicyAccessory
+        NSApplication.sharedApplication().setActivationPolicy_(
+            NSApplicationActivationPolicyAccessory
+        )
+    except Exception:
+        pass
     ArctisApp().run()
 
 
