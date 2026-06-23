@@ -1,48 +1,28 @@
 [project]
-name = "linux-arctis-manager"
-version = "2.4.1"
-description = "A replacement for SteelSeries GG software, to manage your Arctis device on Linux!"
+name = "macos-arctis-manager"
+version = "0.1.0"
+description = "Menu-bar manager for the SteelSeries Arctis Nova Pro Wireless on macOS. Port of Linux-Arctis-Manager."
 readme = "README.md"
 requires-python = ">=3.10"
+license = "GPL-3.0-or-later"
 dependencies = [
-    "dbus-next>=0.2.3",
-    "pulsectl>=24.12.0",
-    "pyside6>=6.10.1",
-    "pyudev>=0.24.4",
-    "pyusb>=1.3.1",
-    "ruamel-yaml>=0.19.1",
+    "hidapi>=0.14",
+    "rumps>=0.4.0",
+    "ruamel.yaml>=0.18",
 ]
 
 [project.scripts]
-lam-daemon = "linux_arctis_manager.scripts.daemon:main"
-lam-cli = "linux_arctis_manager.scripts.cli:main"
-lam-gui = "linux_arctis_manager.scripts.gui:main"
+arctis-manager = "macos_arctis_manager.menubar:main"
 
 [build-system]
 requires = ["uv_build>=0.10.9,<0.11.0"]
 build-backend = "uv_build"
 
+[tool.uv.build-backend]
+module-name = "macos_arctis_manager"
+module-root = "src"
+
 [dependency-groups]
 dev = [
-    "autoflake>=2.3.1",
-    "basedpyright>=1.39.2",
-    "isort>=7.0.0",
-    "pytest>=9.0.2",
-    "pytest-cov>=7.1.0",
+    "pytest>=8",
 ]
-
-[tool.coverage.run]
-omit = [
-    "src/linux_arctis_manager/gui/*",
-    "src/linux_arctis_manager/dbus_service.py",
-    "src/linux_arctis_manager/scripts/dbus_awake.py",
-]
-
-[tool.pyright]
-reportUnknownMemberType = "none"
-reportMissingTypeStubs = "none"
-reportExplicitAny = "none"
-reportAny = "none"
-reportUnknownVariableType = "none"
-reportImplicitOverride = "none"
-extraPaths = ["src"]
