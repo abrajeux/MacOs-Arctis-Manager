@@ -11,3 +11,7 @@ wheels/
 
 # Code coverage reports
 .coverage
+
+# macOS / IDE
+.DS_Store
+.idea/
